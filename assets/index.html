@@ -1,0 +1,43 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<script type="text/javascript" src="jquery-1.11.2.min.js"></script>
+<script type="text/javascript" src="mustache.js"></script>
+<script type="text/javascript">
+	function show(data) {
+		  var data = eval("("+data+")");
+		  var template = $('#template').html();
+		  Mustache.parse(template);
+		  
+		  var rendered = Mustache.render(template, data);
+		  $('#personTable').append(rendered);
+		}
+
+	$(function() {
+		contact.showcontacts();
+	})
+</script>
+
+</head>
+<body>
+	<table border="0" width="100%" id="personTable" cellspacing="0">
+		<tr>
+			<td width="35%">姓名</td>
+			<td width="30%" align="center">存款</td>
+			<td align="center">电话</td>
+		</tr>
+		<script id="template" type="x-tmpl-mustache">
+		{{#contacts}}
+		<tr>
+			<td>{{name}}</td>
+			<td>{{amount}}</td>
+			<td><a href='javascript:contact.call("{{phone}}")'>{{phone}}</a></td>
+		</tr>
+		{{/contacts}}
+		</script>
+	</table>
+	
+	<a href="javascript:window.location.reload()">刷新</a>
+</body>
+</html>
